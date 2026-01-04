@@ -31,6 +31,7 @@ def run_batch(config_path):
     dut_port = common.get("dut_server_port", 13000)
     instrument_ip = common.get("instrument_ip")
     default_test_ids = common.get("default_test_ids", [])
+    base_dir = common.get("base_directory")
     
     # Initialize DUT Configuration
     logger.info(f"Connecting to DUT Server at {dut_ip}:{dut_port}...")
@@ -87,7 +88,8 @@ def run_batch(config_path):
                 ip_address=instrument_ip,
                 project_name=project_name,
                 report_path=report_name,
-                test_ids=test_ids
+                test_ids=test_ids,
+                output_base_dir=base_dir
             )
         except Exception as e:
             logger.error(f"[{run_name}] Instrument Test Failed: {e}")
@@ -109,15 +111,54 @@ def run_batch(config_path):
             
     total_duration = time.time() - start_time_total
         
+    total_duration = time.time() - start_time_total
+        
     # 4. Print Summary
-    print("\n\n==================================================")
-    print("BATCH TEST SUMMARY")
-    print(f"Total Duration: {total_duration:.2f}s")
-    print("==================================================")
-    print(f"{'Run':<20} | {'TestID':<10} | {'Pass':<6} | {'Margin':<10} | {'Duration (s)':<12}")
-    print("-" * 68)
+    print(f"\nTotal Duration: {total_duration:.2f} s\n")
+    print(f"{'Run':<30} | {'Pass / Total':<12} | {'Status':<15} | {'Avg Duration (s)':<16} | {'Key Observation'}")
+    print("-" * 110)
+
+    # Group results by Run
+    from collections import defaultdict
+    run_map = defaultdict(list)
     for res in results_summary:
-        print(f"{res['Run']:<20} | {res['TestID']:<10} | {str(res['Pass']):<6} | {res['Margin']:<10} | {res['Duration']:<12.2f}")
+        run_map[res['Run']].append(res)
+    
+    # Iterate in order of config runs to maintain sequence
+    processed_runs = []
+    for run in runs:
+        r_name = run["name"]
+        if r_name in processed_runs: continue
+        processed_runs.append(r_name)
+        
+        items = run_map.get(r_name, [])
+        if not items:
+            continue
+
+        total = len(items)
+        passed = sum(1 for x in items if x['Pass'])
+        failed_ids = [str(x['TestID']) for x in items if not x['Pass']]
+        duration = items[0]['Duration']  # Run duration is same for all items in run
+        
+        # Determine Status and Observation
+        if passed == total and total > 0:
+            status = "✅ All Pass"
+            obs = "All tests passed."
+        elif passed == 0 and total > 0:
+            status = "❌ All Fail"
+            obs = "Systemic failure across all tests"
+        else:
+            status = "⚠ Partial Fail"
+            if len(failed_ids) == 1:
+                obs = f"Single failure (TestID {failed_ids[0]})"
+            else:
+                # Truncate if too long
+                ids_str = ", ".join(failed_ids)
+                if len(ids_str) > 30:
+                     ids_str = ids_str[:27] + "..."
+                obs = f"Failures on {ids_str}"
+
+        print(f"{r_name:<30} | {f'{passed} / {total}':<12} | {status:<15} | {duration:<16.2f} | {obs}")
     print("==================================================")
 
 if __name__ == "__main__":

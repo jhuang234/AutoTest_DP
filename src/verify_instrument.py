@@ -96,7 +96,7 @@ else:
 
 # --- VERIFICATION TEST ---
 
-def run_instrument_tests(ip_address, project_name, report_path, test_ids, config_path=None):
+def run_instrument_tests(ip_address, project_name, report_path, test_ids, config_path=None, output_base_dir=None):
     """
     Executes instrument tests based on provided parameters.
     Returns the results list.
@@ -134,30 +134,29 @@ def run_instrument_tests(ip_address, project_name, report_path, test_ids, config
         print(f"  ID: {r['test_id']}, Pass: {r['passed']}, Margin: {r['margin']}")
 
     logger.info("--- Testing Save Project ---")
-    # Construct full path if only name is given, or use as is
-    # Here we assume project_name is a name or partial path
-    # For standalone test, we used a full path. 
-    # Let's handle it: if it's absolute, use it. If not, save to current dir or specific folder?
-    # spec says "saving different project name". 
-    # Let's save to a "Projects" subdirectory for cleaner output if a full path isn't provided.
     
+    # Check if project_name is absolute or relative
     if os.path.isabs(project_name):
-         save_path = project_name
+         save_name = project_name
+         save_base = None
     else:
-         save_path = os.path.join(os.getcwd(), "Projects", project_name)
-         os.makedirs(os.path.dirname(save_path), exist_ok=True)
+         save_name = project_name
+         save_base = output_base_dir if output_base_dir else os.path.join(os.getcwd(), "Projects")
 
-    scope.save_project(save_path)
+    scope.save_project(save_as_path=save_name, base_directory=save_base)
     
     
     logger.info("--- Testing Export PDF ---")
     if os.path.isabs(report_path):
-        final_report_path = report_path
+        final_report_name = report_path
+        report_base = None
     else:
-        final_report_path = os.path.join(os.getcwd(), "Reports", report_path)
-        os.makedirs(os.path.dirname(final_report_path), exist_ok=True)
+        final_report_name = report_path
+        report_base = output_base_dir if output_base_dir else os.path.join(os.getcwd(), "Reports")
+        # Do NOT create directory locally if it is remote/restricted
+        # os.makedirs(os.path.dirname(final_report_path), exist_ok=True) 
 
-    scope.export_pdf(final_report_path)
+    scope.export_pdf(final_report_name, directory=report_base)
 
     logger.info("--- Verification Complete ---")
     return results

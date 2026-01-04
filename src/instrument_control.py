@@ -204,41 +204,56 @@ class KeysightController:
             self.logger.error(f"Failed to get results: {e}")
             return []
 
-    def save_project(self, save_as_path=None):
+    def save_project(self, save_as_path=None, base_directory=None):
         if not self.is_connected: return False
         try:
             opts = SaveProjectOptions()
             opts.OverwriteExisting = True
             
+            # If base_directory is provided, set it on the options
+            if base_directory:
+                 opts.BaseDirectory = base_directory
+
             if save_as_path:
-                # Handle full path vs just name
-                directory, filename = os.path.split(save_as_path)
-                
+                if os.path.isabs(save_as_path):
+                     directory, filename = os.path.split(save_as_path)
+                     opts.BaseDirectory = directory
+                     opts.Name = filename
+                else:
+                     opts.Name = save_as_path
+
                 # Sanitize filename (remove invalid characters: \ / : * ? " < > |)
-                # Modeled after TMDS.py sanitize_name
-                filename = "".join(c for c in filename if c not in r'\/:*?"<>|')
-                
-                if directory:
-                    opts.BaseDirectory = directory
-                opts.Name = filename
+                name_only = os.path.basename(opts.Name)
+                sanitized_name = "".join(c for c in name_only if c not in r'\/:*?"<>|')
+                opts.Name = sanitized_name
             
-            self.remote_app.SaveProjectCustom(opts)
-            self.logger.info(f"Project saved to {save_as_path}")
-            return True
+            project_full_path = self.remote_app.SaveProjectCustom(opts)
+            self.logger.info(f"Project saved at {project_full_path}")
+            return project_full_path
         except Exception as e:
             self.logger.error(f"Failed to save project: {e}")
             return False
 
-    def export_pdf(self, file_path):
+    def export_pdf(self, file_path, directory=None):
         if not self.is_connected: return False
         try:
             opts = ExportPdfOptions()
             opts.OverwriteExisting = True
-            opts.FileName = os.path.basename(file_path)
-            opts.Path = os.path.dirname(file_path)
-            self.remote_app.ExportResultsPdfCustom(opts)
-            self.logger.info(f"PDF exported to {file_path}")
-            return True
+            
+            # If directory is explicitly provided, use it.
+            if directory:
+                 opts.Path = directory
+                 opts.FileName = os.path.basename(file_path)
+            else:
+                 # Standard behavior: split the provided path
+                 opts.FileName = os.path.basename(file_path)
+                 opts.Path = os.path.dirname(file_path)
+            
+            opts.ForcePageBreaks = True
+
+            pdf_full_path = self.remote_app.ExportResultsPdfCustom(opts)
+            self.logger.info(f"PDF exported at {pdf_full_path}")
+            return pdf_full_path
         except Exception as e:
             self.logger.error(f"Failed to export PDF: {e}")
             return False

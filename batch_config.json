@@ -3,6 +3,7 @@
         "instrument_ip": "10.144.211.47",
         "dut_server_ip": "10.144.217.79",
         "dut_server_port": 13000,
+        "base_directory": "C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects",
         "default_test_ids": [
             119041,
             119042,
@@ -11,7 +12,7 @@
             119132
         ]
     },
-    "runs": [
+    "_disabled_runs": [
         {
             "name": "Run_1_LowSwing",
             "dut_commands": [
@@ -56,6 +57,90 @@
             ],
             "project_name": "hp_Paya_HPT_J61_EQ15_SW2_FG0_0xFF",
             "report_name": "hp_Paya_HPT_J61_EQ15_SW2_FG0_0xFF.pdf"
+        }
+    ],
+    "runs": [
+        {
+            "name": "Run_7_HighSwing_Term110",
+            "dut_commands": [
+                "write_register(0x7c, 0x4B, 0xAA)",
+                "write_register(0x7c, 0x37, 0xAA)",
+                "write_register(0x7c, 0x5F, 0xAA)",
+                "write_register(0x7c, 0x23, 0xAA)",
+                "write_register(0x7c, 0x15, 0x01)",
+                "write_register(0x7c, 0x18, 0xDE)",
+                "write_register(0x7c, 0x16, 0xA3)",
+                "write_register(0x7c, 0x2C, 0xDE)",
+                "write_register(0x7c, 0x2A, 0xA3)",
+                "write_register(0x7c, 0x40, 0xDE)",
+                "write_register(0x7c, 0x3E, 0xA3)",
+                "write_register(0x7c, 0x54, 0xDE)",
+                "write_register(0x7c, 0x52, 0xA3)",
+                "write_register(0x7c, 0x1A, 0x51)",
+                "write_register(0x7c, 0x2E, 0x51)",
+                "write_register(0x7c, 0x42, 0x51)",
+                "write_register(0x7c, 0x56, 0x51)",
+                "eq 10",
+                "sw 1",
+                "fg 1"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ10_SW1_FG1_0xEE_Term110",
+            "report_name": "hp_Paya_HPT_J61_EQ10_SW1_FG1_0xEE_Term110.pdf"
+        },
+        {
+            "name": "Run_4_HighSwing_Term90",
+            "dut_commands": [
+                "write_register(0x7c, 0x4B, 0x3A)",
+                "write_register(0x7c, 0x37, 0x3A)",
+                "write_register(0x7c, 0x5F, 0x3A)",
+                "write_register(0x7c, 0x23, 0x3A)",
+                "eq 10",
+                "sw 2",
+                "fg 1"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ10_SW2_FG1_0xEE_Term90",
+            "report_name": "hp_Paya_HPT_J61_EQ10_SW2_FG1_0xEE_Term90.pdf"
+        },
+        {
+            "name": "Run_5_HighSwing_Term90",
+            "dut_commands": [
+                "write_register(0x7c, 0x4B, 0x3A)",
+                "write_register(0x7c, 0x37, 0x3A)",
+                "write_register(0x7c, 0x5F, 0x3A)",
+                "write_register(0x7c, 0x23, 0x3A)",
+                "write_register(0x7c, 0x15, 0x01)",
+                "write_register(0x7c, 0x18, 0xDE)",
+                "write_register(0x7c, 0x16, 0xA3)",
+                "write_register(0x7c, 0x2C, 0xDE)",
+                "write_register(0x7c, 0x2A, 0xA3)",
+                "write_register(0x7c, 0x40, 0xDE)",
+                "write_register(0x7c, 0x3E, 0xA3)",
+                "write_register(0x7c, 0x54, 0xDE)",
+                "write_register(0x7c, 0x52, 0xA3)",
+                "write_register(0x7c, 0x1A, 0x51)",
+                "write_register(0x7c, 0x2E, 0x51)",
+                "write_register(0x7c, 0x42, 0x51)",
+                "write_register(0x7c, 0x56, 0x51)",
+                "eq 10",
+                "sw 1",
+                "fg 1"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ10_SW1_FG1_0xEE_Term90",
+            "report_name": "hp_Paya_HPT_J61_EQ10_SW1_FG1_0xEE_Term90.pdf"
+        },
+        {
+            "name": "Run_6_HighSwing_Term110",
+            "dut_commands": [
+                "write_register(0x7c, 0x4B, 0xAA)",
+                "write_register(0x7c, 0x37, 0xAA)",
+                "write_register(0x7c, 0x5F, 0xAA)",
+                "write_register(0x7c, 0x23, 0xAA)",
+                "eq 10",
+                "sw 2",
+                "fg 1"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ10_SW2_FG1_0xEE_Term110",
+            "report_name": "hp_Paya_HPT_J61_EQ10_SW2_FG1_0xEE_Term110.pdf"
         }
     ]
 }
