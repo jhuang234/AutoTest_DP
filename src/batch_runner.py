@@ -38,11 +38,15 @@ def run_batch(config_path):
     
     results_summary = []
     
+    start_time_total = time.time()
+    
     for run in runs:
         run_name = run["name"]
         logger.info(f"==================================================")
         logger.info(f"STARTING RUN: {run_name}")
         logger.info(f"==================================================")
+        
+        run_start_time = time.time()
         
         # 1. Configure DUT
         logger.info(f"[{run_name}] Configuring DUT...")
@@ -88,6 +92,10 @@ def run_batch(config_path):
         except Exception as e:
             logger.error(f"[{run_name}] Instrument Test Failed: {e}")
             run_results = []
+        
+        run_end_time = time.time()
+        run_duration = run_end_time - run_start_time
+        logger.info(f"[{run_name}] Run Complete. Duration: {run_duration:.2f}s\n")
 
         # 3. Collect Results
         for res in run_results:
@@ -95,20 +103,21 @@ def run_batch(config_path):
                 "Run": run_name,
                 "TestID": res['test_id'],
                 "Pass": res['passed'],
-                "Margin": res['margin']
+                "Margin": res['margin'],
+                "Duration": run_duration
             })
             
-        logger.info(f"[{run_name}] Run Complete.\n")
-        
+    total_duration = time.time() - start_time_total
         
     # 4. Print Summary
     print("\n\n==================================================")
     print("BATCH TEST SUMMARY")
+    print(f"Total Duration: {total_duration:.2f}s")
     print("==================================================")
-    print(f"{'Run':<20} | {'TestID':<10} | {'Pass':<6} | {'Margin':<10}")
-    print("-" * 52)
+    print(f"{'Run':<20} | {'TestID':<10} | {'Pass':<6} | {'Margin':<10} | {'Duration (s)':<12}")
+    print("-" * 68)
     for res in results_summary:
-        print(f"{res['Run']:<20} | {res['TestID']:<10} | {str(res['Pass']):<6} | {res['Margin']:<10}")
+        print(f"{res['Run']:<20} | {res['TestID']:<10} | {str(res['Pass']):<6} | {res['Margin']:<10} | {res['Duration']:<12.2f}")
     print("==================================================")
 
 if __name__ == "__main__":
