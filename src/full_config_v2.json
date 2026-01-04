@@ -1,0 +1,142 @@
+{
+    "_comment_Device_Setup": "Parameters from SetConfig.txt",
+    "ConnectorType": "Standard DP/mDP", #USB Type-C, Enhanced FsDP, Enhanced mDP
+    "DUTLaneCount": "4 Lanes", #1 Lane,
+    2 Lanes,
+    4 Lanes
+    "IsSSCSupported": "1.0", #0.0,
+    1.0
+    "IsRetimerAttached": "0.0", #0.0,
+    1.0
+    "AutomationController": "TCPIP", #TCPIP, Unigraf_UCD_323_G2
+    "AutomationEnable": "0.0", #0.0,
+    1.0
+    "DeviceIdentifier": "DUT_Default", #User-defined text
+    "UserDescription": "AutoTest Run", #User-defined text
+
+    "_comment_Connection_Setup": "Parameters from SetConfig_ConnectionSetup.txt",
+    "ConnectionType": "Differential", #"Differential, Single Ended, Switch Matrix, Common"
+    "IsLane0Selected": "1.0", #0.0,
+    1.0
+    "IsLane1Selected": "1.0", #0.0,
+    1.0
+    "IsLane2Selected": "1.0", #0.0,
+    1.0
+    "IsLane3Selected": "1.0", #0.0,
+    1.0
+    "SelectedLaneA": "Lane 0", #Lane 0, Lane 1, Lane 2, Lane 3
+    "SelectedChannelA": "CHAN1", #CHAN1, CHAN2, CHAN3, CHAN4
+    "SelectedLaneB": "Lane 1", #Lane 0, Lane 1, Lane 2, Lane 3
+    "SelectedChannelB": "CHAN2", #CHAN1, CHAN2, CHAN3, CHAN4
+    "SelectedLaneC": "Lane 2", #Lane 0, Lane 1, Lane 2, Lane 3
+    "SelectedChannelC": "CHAN3", #CHAN1, CHAN2, CHAN3, CHAN4
+    "SelectedLaneD": "Lane 3", #Lane 0, Lane 1, Lane 2, Lane 3
+    "SelectedChannelD": "CHAN4", #CHAN1, CHAN2, CHAN3, CHAN4
+
+    "_comment_Test_Setup": "Parameters from SetConfog_TestSetup.txt",
+    "PredefinedTP2PresetNumber": "0.0", #0.0,
+    1.0
+    "PredefinedTP2PresetNumber10GbpsLane0": "P0", #P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15
+    "PredefinedTP2PresetNumber10GbpsLane1": "P0", #P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15
+    "PredefinedTP2PresetNumber10GbpsLane2": "P0", #P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15
+    "PredefinedTP2PresetNumber10GbpsLane3": "P0", #P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15
+    "RunTP2PresetCalibration": "0.0", #0.0,
+    1.0
+    
+    "TP2_P0": "1.0", #0.0,
+    1.0
+    "TP2_P1": "1.0", #0.0,
+    1.0
+    "TP2_P2": "1.0", #0.0,
+    1.0
+    "TP2_P3": "1.0", #0.0,
+    1.0
+    "TP2_P4": "1.0", #0.0,
+    1.0
+    "TP2_P5": "1.0", #0.0,
+    1.0
+    "TP2_P6": "1.0", #0.0,
+    1.0
+    "TP2_P7": "1.0", #0.0,
+    1.0
+    "TP2_P8": "1.0", #0.0,
+    1.0
+    "TP2_P9": "1.0", #0.0,
+    1.0
+    "TP2_P10": "1.0", #0.0,
+    1.0
+    "TP2_P11": "1.0", #0.0,
+    1.0
+    "TP2_P12": "1.0", #0.0,
+    1.0
+    "TP2_P13": "1.0", #0.0,
+    1.0
+    "TP2_P14": "1.0", #0.0,
+    1.0
+    "TP2_P15": "1.0", #0.0,
+    1.0
+
+    "PredefinedTP3PresetNumber": "0.0", #0.0,
+    1.0
+    "RunTP3PresetCalibration": "0.0", #0.0,
+    1.0
+
+    "TP3_P0": "1.0", #0.0,
+    1.0
+    "TP3_P1": "1.0", #0.0,
+    1.0
+    "TP3_P2": "1.0", #0.0,
+    1.0
+    "TP3_P3": "1.0", #0.0,
+    1.0
+    "TP3_P4": "1.0", #0.0,
+    1.0
+    "TP3_P5": "1.0", #0.0,
+    1.0
+    "TP3_P6": "1.0", #0.0,
+    1.0
+    "TP3_P7": "1.0", #0.0,
+    1.0
+    "TP3_P8": "1.0", #0.0,
+    1.0
+    "TP3_P9": "1.0", #0.0,
+    1.0
+    "TP3_P10": "1.0", #0.0,
+    1.0
+    "TP3_P11": "1.0", #0.0,
+    1.0
+    "TP3_P12": "1.0", #0.0,
+    1.0
+    "TP3_P13": "1.0", #0.0,
+    1.0
+    "TP3_P14": "1.0", #0.0,
+    1.0
+    "TP3_P15": "1.0", #0.0,
+    1.0
+
+    "PredefinedTP3CTLEDCGain": "0.0", #0.0,
+    1.0
+    "RunTP3CTLECalibration": "0.0", #0.0,
+    1.0
+
+    "TP3_DC0dB": "1.0", #0.0,
+    1.0
+    "TP3_DC1dB": "1.0", #0.0,
+    1.0
+    "TP3_DC2dB": "1.0", #0.0,
+    1.0
+    "TP3_DC3dB": "1.0", #0.0,
+    1.0
+    "TP3_DC4dB": "1.0", #0.0,
+    1.0
+    "TP3_DC5dB": "1.0", #0.0,
+    1.0
+    "TP3_DC6dB": "1.0", #0.0,
+    1.0
+    "TP3_DC7dB": "1.0", #0.0,
+    1.0
+    "TP3_DC8dB": "1.0", #0.0,
+    1.0
+    "TP3_DC9dB": "1.0" #0.0,
+    1.0
+}

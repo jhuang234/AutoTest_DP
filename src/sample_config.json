@@ -1,0 +1,13 @@
+{
+    "ConnectorType": "Standard DP/mDP",
+    "DUTLaneCount": "4 Lanes",
+    "IsSSCSupported": "1.0",
+    "IsRetimerAttached": "0.0",
+    "ConnectionType": "Differential",
+    "IsLane0Selected": "1.0",
+    "IsLane1Selected": "1.0",
+    "IsLane2Selected": "1.0",
+    "IsLane3Selected": "1.0",
+    "DeviceIdentifier": "DUT_001",
+    "UserDescription": "Validation Run 1"
+}

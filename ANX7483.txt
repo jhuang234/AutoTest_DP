@@ -1,0 +1,168 @@
+
+EQ, SW, FG三個指令的功能：
+
+1. 假設function name為 dp_eq, dp_sw and dp_fg.
+
+
+
+
+其中dp_eq 
+
+1. 如果使用者不輸入eq 值，僅輸入指令'eq'。則會先讀取 Offset 0x16/0x2a/0x3e/0x52 register 的值( 0x16 對應到 dp lane0 register, 0x2a 對應到 dp lane1 register, 依此類推，每個 lane register的結構都一樣)，先以十進位顯示目前eq值 (bit[7:4] UTX2_EQ_CAP)，再顯示Offset 0x16/0x2a... register 的值。
+2. 如果使用者輸入eq 值, 則會先讀取 Offset 0x16/0x2a/0x3e/0x52 register 的值，再使用 user input eq value（十進位）去覆蓋bit[7:4] UTX2_EQ_CAP，但是寫入的時候不要變更其他bit
+3. 使用者輸入eq 值的時候，以此eq值去同時修改 lane0/1/2/3 register(Offset 0x16/0x2a/0x3e/0x52)
+
+
+---
+
+### Lane0
+
+**Table 23 UTX2_PORT_CFG_0**  **EQ (0–15)**
+
+* **Name**: UTX2_PORT_CFG_0
+* **I2C Address**: 0x7c
+* **Offset**: 0x16
+
+| Bit | Name             | Type | Default value | Description                                                                                                                                                                                  |
+| --: | ---------------- | ---- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 7:4 | UTX2_EQ_CAP      | R/W  | 0xC           | EQ input source cap (boost gain) selection when UTX2 port is configured as RX input port                                                                                                     |
+| 3:2 | UTX2_EQ_INCM     | R/W  | 0x0           | EQ input pair source voltage vs selection (input cm = vs = vgs) when UTX2 port is configured as RX input port.<br>00: VDD18–0.48V,<br>01: VDD18–0.56V,<br>10: VDD18–0.32V,<br>11: VDD18–0.4V |
+|   1 | UTX2_LRD_CORE_EN | R/W  | 0x1           | Enable linear redriver core ckt when UTX2 port is configured as RX input port.<br>0: disable, 1: enable                                                                                      |
+|   0 | UTX2_BIAS_EN     | R/W  | 0x1           | Enable lane bias current when UTX2 port is configured as RX input port.<br>0: disable, 1: enable                                                                                             |
+
+
+其中dp_fg
+
+1. 如果使用者不輸入fg 值，僅輸入指令'fg'。則會先讀取 Offset 0x18/0x2c/0x40/0x54 register 的值( 0x18 對應到 dp lane0 register, 0x2c 對應到 dp lane1 register, 依此類推，每個 lane register的結構都一樣)，先以十進位顯示目前fg值 (bit[5:4] UTX2_VGA_GAIN)，再顯示Offset 0x18/0x2c... register 的值。
+2. 如果使用者輸入fg 值, 則會先讀取 Offset 0x18/0x2c/0x40/0x54 register 的值，再使用 user input eq value（十進位）去覆蓋bit[5:4] UTX2_VGA_GAIN，但是寫入的時候不要變更其他bit
+3. 使用者輸入fg 值的時候，以此fg值去同時修改 lane0/1/2/3 register(Offset 0x18/0x2c/0x40/0x54)
+
+
+### Lane0
+**Table 25 UTX2_PORT_CFG_2**
+
+*   **Name:** UTX2_PORT_CFG_2
+*   **I2C Address:** 0x7c
+*   **Offset:** 0x18
+*   **FG(0~3)**
+
+| Bit | Name | Type | Default value | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| 7:6 | UTX2_VGA_IDAC | R/W | 0x3 | vga stage bias current selection when UTX2 port is configured as RX input port. 00: 11: |
+| 5:4 | UTX2_VGA_GAIN | R/W | 0x3 | vga gain selection when UTX2 port is configured as RX input port, combined with REG_UTX2_VGA_GAIN_HIGH.<br>REG_UTX2_VGA_GAIN_HIGH=0: 000:0.7dB, 001:1.7dB, 010:2.7dB, 011:3.7 dB;<br>REG_UTX2_VGA_GAIN_HIGH=1, 100:2.3dB, 101:3.3dB, 110:4.3dB ,111:5.3dB |
+| 3:0 | UTX2_EQ_RES | R/W | 0x8 | LEQ eq input source resistance selection when UTX2 port is configured as RX input port. 1000 @13.5Gbps<br>1100 @20Gbps |
+
+
+
+
+
+
+其中dp_sw
+
+1. 如果使用者不輸入sw 值，僅輸入指令'sw'。則會先讀取 Offset 0x1a/0x2e/0x42/0x56 register 的值( 0x18 對應到 dp lane0 register, 0x2c 對應到 dp lane1 register, 依此類推，每個 lane register的結構都一樣)，先以十進位顯示目前fg值 (bit[1:0] UTX2_DRV_SWING)，再顯示Offset 0x1a/0x2c... register 的值。
+2. 如果使用者輸入sw 值, 則會先讀取 Offset 0x1a/0x2e/0x42/0x56 register 的值，再使用 user input eq value（十進位）去覆蓋bit[1:0] UTX2_DRV_SWING，但是寫入的時候不要變更其他bit
+3. 使用者輸入sw 值的時候，以此sw值去同時修改 lane0/1/2/3 register(Offset 0x1a/0x2e/0x42/0x56)
+
+
+---
+### Lane0
+### Table 27 UTX2_PORT_CFG_4  **SW[0–3]**
+
+* **Name**: UTX2_PORT_CFG_4
+* **I2C Address**: 0x7c
+* **Offset**: 0x1A
+
+| Bit | Name             | Type | Default value | Description                                                                                                                                                                        |
+| --: | ---------------- | ---- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 7:6 | UTX2_LFPS_VTH    | R/W  | 0x1           | LFPS detection threshold voltage selection when UTX2 port is configured as RX input port.<br>00: 160 mVppd,<br>01: 200 mVppd,<br>10: 240 mVppd,<br>11: 280 mVppd                   |
+|   5 | UTX2_LFPS_EN     | R/W  | 0x0           | Enable LFPS detection when UTX2 port is configured as RX input port.<br>0: disable, 1: enable                                                                                      |
+|   4 | UTX2_RTERM60K_EN | R/W  | 0x1           | Enable 60K ohms input resistance during reset or RX termination not powered when DRX2 port is configured as RX input port.<br>0: disable (Hi-Z), 1: enable (60K)                   |
+| 3:2 | UTX2_RTERM_PAC   | R/W  | 0x0           | Input termination resistance configuration to obtain AC peaking when DRX2 port is configured as RX input port (top 2 boost gain)                                                   |
+| 1:0 | UTX2_DRV_SWING   | R/W  | 0x2           | Output driver linear range swing selection when UTX2 port is configured as RX input port.<br>00: 10 mA @ 0.8 V,<br>01: 12.5 mA @ 1 V,<br>10: 15 mA @ 1.2 V,<br>11: 17.5 mA @ 1.4 V |
+
+
+
+
+
+MEQ指令：(Offset: 0x17, 0x2b, 0x3f, 0x53) 的register table都一樣。變更 MEQ register 的時候，必須同時變更這4個 register offset
+
+
+### Table 78: UTX1_PORT_CFG_1
+
+**Register Information:**
+*   **Name:** UTX1_PORT_CFG_1
+*   **I2C Address:** 0x7c
+*   **Offset:** 0x53
+
+這是一份完整的 MEQ 設定表格，列出了在 `UTX1_EQ_IDAC` (Bit 7:6) 固定為 `0x3` (Binary `11`) 的情況下，所有的 MFR 與 MFC 組合（共 64 組）。
+
+表格中已包含了 Designer 指定的四個關鍵設定 (`0xC0`, `0xE8`, `0xE9`, `0xEE`) 及其描述。
+
+### MEQ Setting Table: UTX1_PORT_CFG_1
+
+| Register Value (Hex) | Binary Representation<br>`[7:6] [5:3] [2:0]` | UTX1_EQ_IDAC<br>(Bit 7:6) | UTX1_EQ_MFR<br>(Bit 5:3) | UTX1_EQ_MFC<br>(Bit 2:0) | Description |
+| :---: | :---: | :---: | :---: | :---: | :--- |
+| **0xC0** | `11 000 000` | 0x3 | 0x0 | 0x0 | **Lowest MFR & MFC** |
+| 0xC1 | `11 000 001` | 0x3 | 0x0 | 0x1 | - |
+| 0xC2 | `11 000 010` | 0x3 | 0x0 | 0x2 | - |
+| 0xC3 | `11 000 011` | 0x3 | 0x0 | 0x3 | - |
+| 0xC4 | `11 000 100` | 0x3 | 0x0 | 0x4 | - |
+| 0xC5 | `11 000 101` | 0x3 | 0x0 | 0x5 | - |
+| 0xC6 | `11 000 110` | 0x3 | 0x0 | 0x6 | - |
+| 0xC7 | `11 000 111` | 0x3 | 0x0 | 0x7 | - |
+| 0xC8 | `11 001 000` | 0x3 | 0x1 | 0x0 | - |
+| 0xC9 | `11 001 001` | 0x3 | 0x1 | 0x1 | - |
+| 0xCA | `11 001 010` | 0x3 | 0x1 | 0x2 | - |
+| 0xCB | `11 001 011` | 0x3 | 0x1 | 0x3 | - |
+| 0xCC | `11 001 100` | 0x3 | 0x1 | 0x4 | - |
+| 0xCD | `11 001 101` | 0x3 | 0x1 | 0x5 | - |
+| 0xCE | `11 001 110` | 0x3 | 0x1 | 0x6 | - |
+| 0xCF | `11 001 111` | 0x3 | 0x1 | 0x7 | - |
+| 0xD0 | `11 010 000` | 0x3 | 0x2 | 0x0 | - |
+| 0xD1 | `11 010 001` | 0x3 | 0x2 | 0x1 | - |
+| 0xD2 | `11 010 010` | 0x3 | 0x2 | 0x2 | - |
+| 0xD3 | `11 010 011` | 0x3 | 0x2 | 0x3 | - |
+| 0xD4 | `11 010 100` | 0x3 | 0x2 | 0x4 | - |
+| 0xD5 | `11 010 101` | 0x3 | 0x2 | 0x5 | - |
+| 0xD6 | `11 010 110` | 0x3 | 0x2 | 0x6 | - |
+| 0xD7 | `11 010 111` | 0x3 | 0x2 | 0x7 | - |
+| 0xD8 | `11 011 000` | 0x3 | 0x3 | 0x0 | - |
+| 0xD9 | `11 011 001` | 0x3 | 0x3 | 0x1 | - |
+| 0xDA | `11 011 010` | 0x3 | 0x3 | 0x2 | - |
+| 0xDB | `11 011 011` | 0x3 | 0x3 | 0x3 | - |
+| 0xDC | `11 011 100` | 0x3 | 0x3 | 0x4 | - |
+| 0xDD | `11 011 101` | 0x3 | 0x3 | 0x5 | - |
+| 0xDE | `11 011 110` | 0x3 | 0x3 | 0x6 | - |
+| 0xDF | `11 011 111` | 0x3 | 0x3 | 0x7 | - |
+| 0xE0 | `11 100 000` | 0x3 | 0x4 | 0x0 | - |
+| 0xE1 | `11 100 001` | 0x3 | 0x4 | 0x1 | - |
+| 0xE2 | `11 100 010` | 0x3 | 0x4 | 0x2 | - |
+| 0xE3 | `11 100 011` | 0x3 | 0x4 | 0x3 | - |
+| 0xE4 | `11 100 100` | 0x3 | 0x4 | 0x4 | - |
+| 0xE5 | `11 100 101` | 0x3 | 0x4 | 0x5 | - |
+| 0xE6 | `11 100 110` | 0x3 | 0x4 | 0x6 | - |
+| 0xE7 | `11 100 111` | 0x3 | 0x4 | 0x7 | - |
+| **0xE8** | `11 101 000` | 0x3 | 0x5 | 0x0 |  |
+| **0xE9** | `11 101 001` | 0x3 | 0x5 | 0x1 |  |
+| 0xEA | `11 101 010` | 0x3 | 0x5 | 0x2 | - |
+| 0xEB | `11 101 011` | 0x3 | 0x5 | 0x3 | - |
+| 0xEC | `11 101 100` | 0x3 | 0x5 | 0x4 | - |
+| 0xED | `11 101 101` | 0x3 | 0x5 | 0x5 | - |
+| **0xEE** | `11 101 110` | 0x3 | 0x5 | 0x6 | **Default** |
+| 0xEF | `11 101 111` | 0x3 | 0x5 | 0x7 | - |
+| 0xF0 | `11 110 000` | 0x3 | 0x6 | 0x0 | - |
+| 0xF1 | `11 110 001` | 0x3 | 0x6 | 0x1 | - |
+| 0xF2 | `11 110 010` | 0x3 | 0x6 | 0x2 | - |
+| 0xF3 | `11 110 011` | 0x3 | 0x6 | 0x3 | - |
+| 0xF4 | `11 110 100` | 0x3 | 0x6 | 0x4 | - |
+| 0xF5 | `11 110 101` | 0x3 | 0x6 | 0x5 | - |
+| 0xF6 | `11 110 110` | 0x3 | 0x6 | 0x6 | - |
+| 0xF7 | `11 110 111` | 0x3 | 0x6 | 0x7 | - |
+| 0xF8 | `11 111 000` | 0x3 | 0x7 | 0x0 | - |
+| 0xF9 | `11 111 001` | 0x3 | 0x7 | 0x1 | - |
+| 0xFA | `11 111 010` | 0x3 | 0x7 | 0x2 | - |
+| 0xFB | `11 111 011` | 0x3 | 0x7 | 0x3 | - |
+| 0xFC | `11 111 100` | 0x3 | 0x7 | 0x4 | - |
+| 0xFD | `11 111 101` | 0x3 | 0x7 | 0x5 | - |
+| 0xFE | `11 111 110` | 0x3 | 0x7 | 0x6 | - |
+| 0xFF | `11 111 111` | 0x3 | 0x7 | 0x7 | - |

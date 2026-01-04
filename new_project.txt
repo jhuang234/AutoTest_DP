@@ -1,0 +1,19 @@
+Start new project.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+NewProject '<DiscardUnsaved>'
+
+NewProjectCustom 'DiscardUnsaved = <Boolean>; PreserveAcqSetup = <Boolean>; PreserveInfiniiSim = <Boolean>;
+PreservePrecisionProbe = <Boolean>; PreserveSwitchMatrix = <Boolean>; PreserveTypeC = <Boolean>'
+
+----- Parameters -----
+<Boolean> = One of the following:
+    True
+    False
+<DiscardUnsaved> = One of the following:
+    True
+    False
+
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).

@@ -1,0 +1,249 @@
+這是一個非常典型且完整的「閉迴路自動化測試 (Closed-loop Automated Test)」系統需求。為了確保開發順利，我們需要將這個系統拆解為數個低耦合的模組。
+
+以下我為你草擬的**軟體開發規格書 (SRS)** 與**專案票務拆解 (Project Breakdown / Tickets)**。
+
+在開始之前，為了確保技術細節的正確性，我有幾個關鍵問題需要你釐清（請在閱讀完規格書後回答）：
+
+### 待釐清問題 (Clarifications Needed)
+1.  **Keysight D9040DPPC 的控制介面**：該軟體通常支援 VISA (SCPI 指令) 或 .NET Remote Interface。請問你目前計畫使用哪種方式？（通常 SCPI 較通用，但 .NET 整合度較深）。
+	Answer: 使用.NET Remote Interface。參考當前目錄下面的 Autotest\TMDS.py。 Autotest是一個與本專案類似的專案，但是是控制HDMI測試的。
+	
+2.  **與「另一台 PC」的通訊協定**：控制 I2C 的那台 PC 需要跑一個 Server 程式來接收指令。請問該程式是你需要一起開發的嗎？通訊協定偏好使用 TCP Socket, REST API (HTTP), 還是 Python XML-RPC？
+	Answer: 使用 TCP Socket。參考當前目錄下面的 Autotest\i2c.py。該程式已經針對HDMI部分開發完成。但是DP的部分，你先用 i2c 寫入 slave address, register offset address, register value的方式來控制待測物。
+			例如：IIC("write 7c 02 01")，其中 0x7c 是 slave address, 0x02 是 register offset address, 0x01 是 register value
+
+3.  **Parameter Sweep 的策略定義**：Register 的調整策略（例如：從 Pre-emphasis level 0 掃到 3）是寫死在程式碼中，還是需要從外部設定檔 (JSON/CSV) 讀取？
+	Answer: (1) 從外部檔案讀取。register是8-bit
+			(2) 8-bit之中只有某些 bit 需要sweep，其他的 bit 保持不動。
+			(3) 此外，有些 register 是初始化用的。例如，修改 EQ/SW/FG 的 register 之前，都必須先將 0x7c:0x15 bit[0]設置為1。然後才能開始修改對應的EQ/SW/FG 的 register
+			(4) Parameter Sweep 的核心演算法，和 Remote I2C Interface 之間，用簡單的縮寫交換資料，避免直接用 hex value 以增加程式可讀性。例如： EQ register 是 0x7c:0x52，預設值是 0xEE。 演算法應該發送類似 "eq 3"(valid range 0 ~15)的指令給 Remote I2C Interface
+			(5) register map 請見 ANX7483.txt
+---
+
+# 軟體開發規格書 (Software Requirement Specification)
+
+## 1. 專案概述 (Overview)
+開發一套 Python 自動化控制系統，用於 DisplayPort (DP) 合規性測試。系統需整合示波器控制與 DUT (Device Under Test) 的 I2C Register 控制，實現「測試 -> 判斷 -> 調整參數 -> 驗證」的全自動閉迴路流程。
+
+## 2. 系統架構 (System Architecture)
+系統分為三個主要實體：
+1.  **Main Controller (本專案核心)**: 執行邏輯判斷、狀態機管理、報告生成。
+2.  **Instrument Interface**: 負責與 Keysight D9040DPPC 溝通。
+3.  **DUT Interface**: 負責與遠端 I2C Controller PC 溝通。
+
+## 3. 模組功能需求 (Functional Requirements)
+
+### Module A: Instrument Control (Keysight D9040DPPC Wrapper)
+負責所有與示波器軟體的互動，將底層 SCPI/.NET 指令封裝成 Python 函式。
+*   **A-1 Connection**: 建立/斷開與示波器的連線 (VISA/Socket)。
+*   **A-2 Setup**: 設定 Project 參數 (Link rate, Lane count, Preset)。
+		Project 參數，參考SetConfig.txt，SetConfig_ConnectionSetup.txt 和 SetConfog_TestSetup.txt。Project 參數必須是一個獨立的檔案，以方便未來進一步修改或增加。
+*   **A-3 Selection**: 選擇特定的測試項目 (Select Test IDs)。
+		TestID 本身必須是一個獨立的檔案，以方便未來進一步修改或增加。你可以參考 HP_Paya_HPT_J61_UHBR10_MEQ8_EQ15_SW2_FG1.csv 裡面的 Test ID 和 Test Name（做為註解，一定在寫在程式碼中，否則人類根本難以判斷這個 Test ID 數字的意義）
+*   **A-4 Execution**: 觸發 Run 指令，並實作 Polling 機制等待測試完成。
+*   **A-5 Result Parsing**: 讀取測試結果 (Pass/Fail) 與數值 (Margin, Measured Value)。
+*   **A-6 Reporting**: 觸發儲存專案 (.dpj) 與輸出報告 (.pdf)。
+
+### Module B: DUT Control (Remote I2C Interface)
+負責發送指令給控制 DUT 的遠端 PC。
+*   **B-1 Comm Client**: 實作與遠端 PC 的連線客戶端 (Client)。
+*   **B-2 Register Write**: 發送 `(Register Address, Value)` 給遠端 PC。
+*   **B-3 Reset/Init**: (選用) 發送重置 DUT 或初始化指令。
+
+### Module C: Test Logic Core (The "Brain")
+負責核心演算法與狀態機。
+*   **C-1 Standard Flow**: 執行標準測試流程。
+*   **C-2 Decision Making**: 判斷 Pass/Fail。
+*   **C-3 Parameter Sweep**: 讀取 Sweep 策略設定，依序產生下一組 Register 參數。
+*   **C-4 Regression Logic**: 紀錄成功的參數組合，並觸發「全項目回歸測試 (Regression Test)」。
+
+### Module D: Configuration & Logging
+*   **D-1 Config Loader**: 讀取測試環境設定 (IP Address, Port) 與 DUT Sweep 策略 (JSON/YAML)。
+*   **D-2 Logger**: 紀錄詳細執行 Log (便於 Debug)。
+
+---
+
+## 4. 專案票務拆解 (Tickets / Tasks Breakdown)
+
+以下是可以直接輸入到 Jira/Trello/GitLab 的 Tickets，分為不同的階段 (Milestones)。
+
+### Milestone 1: 基礎連線與控制 (Basic Connectivity)
+目標：確保 Python 可以控制示波器跑測試，並能控制 DUT 寫 Register，兩者獨立運作正常。
+
+*   **[T-01] 實作 Keysight Connection Class**
+    *   *驗收條件*：Python script 能透過 VISA/Network 連上 D9040DPPC，並讀取 IDN (Identification string)。
+*   **[T-02] 封裝 D9040DPPC 基本操作函式**
+    *   *內容*：實作 `load_setup()`, `select_tests()`, `run_test()`, `wait_for_completion()`。
+    *   *驗收條件*：Script 能呼叫示波器開始執行一個簡單的測試項目。
+*   **[T-03] 實作測試結果讀取函式**
+    *   *內容*：實作 `get_results()`，解析回傳的 XML/CSV 或 SCPI query 結果。
+    *   *驗收條件*：能準確回傳 Pass/Fail 狀態與 Margin 數值。
+*   **[T-04] 開發 DUT Remote Control Server (在另一台 PC 上)**
+    *   *內容*：撰寫一個簡單的 Listener (Python/C#)，接收指令並呼叫 USB-to-I2C driver。
+    *   *驗收條件*：從主控端發送指令，能看到示波器上的波形因 Register 改變而變化。
+*   **[T-05] 實作 DUT Control Client (主控端)**
+    *   *內容*：封裝 `write_register(addr, data)` 函式。
+    *   *驗收條件*：能成功與 T-04 的 Server 溝通並寫入值。
+
+### Milestone 2: 核心邏輯開發 (Core Logic Implementation)
+目標：將 Module A 和 B 串接，實作失敗後的自動調整邏輯。
+
+
+*   **[T-06] 定義策略設定檔 (Strategy Configuration)**
+    *   *內容*：設計並實作 JSON Parser，能將測試項目 ID (Test IDs) 映射到具體的 Parameter Group 名稱。
+    *   *驗收條件*：輸入測試 ID `Test_Jitter`，程式能回傳對應的參數列表 `["Param_A_Level1", "Param_A_Level2"]`。
+*   **[T-07] 實作失敗分析器 (Failure Analyzer)**
+    *   *內容*：解析 D9040DPPC 回傳的結果。若有多個項目失敗，根據 Priority 排序，決定當下要處理哪一個失敗項目（通常一次只解一個問題）。
+    *   *驗收條件*：輸入 `[Jitter_Fail (Prio 1), Eye_Fail (Prio 2)]`，函式回傳 `Jitter_Fail` 作為當前調整目標。
+*   **[T-08] 實作「針對性調整」流程 (Targeted Tuning Loop)**
+    *   *內容*：
+        1. 取得當前處理的 Fail Item。
+        2. 從 Strategy Map 獲取對應的 Register 列表。
+        3. 記錄當前嘗試到列表的第幾個位置 (Index)。
+        4. 呼叫 DUT Interface 寫入新值。
+    *   *驗收條件*：模擬 Jitter Fail，程式只調整 Pre-emphasis Register；模擬 Eye Fail，程式只調整 Swing Register。
+*   **[T-09] 實作「參數衝突檢查」 (Conflict Check) - (選用但建議)**
+    *   *內容*：如果上一輪測試修好了 Jitter (改了 Reg A)，這一輪修 Eye Height 又要改 Reg A，需發出警告或嘗試尋找交集。
+
+
+
+### Milestone 3: 報告與系統整合 (Reporting & Integration)
+目標：完成最後一哩路，包含報告輸出與例外處理。
+
+*   **[T-10] 實作「驗證與回歸」邏輯 (Validation & Regression)**
+    *   *內容*：
+        1. **驗證 (Verify)**：參數調整後，先只重測剛才失敗的項目。
+        2. **回歸 (Regression)**：如果該項目 Pass 了，執行全項目測試。
+        3. **遞迴 (Recursion)**：如果在全項目測試中發現新項目 Fail（例如修好 A 壞了 B），則將 B 視為新的目標，重新進入 T-08 流程。
+    *   *驗收條件*：確保流程能處理「修 A -> 壞 B -> 修 B -> 全 Pass」的情境。
+*   **[T-11] 輸出最終報告 (不變)**
+    *   儲存 PDF 與最終參數組合。
+
+---
+
+## 5. 邏輯流程偽代碼 (Logic Pseudo-code)
+
+這是給開發者參考的核心邏輯 (對應需求 6-10)：
+
+```python
+def main_process():
+    # Step 1-3: Setup
+    scope.connect()
+    scope.setup_project(link_rate="HBR2", lanes=4)
+    test_list = ["Test_Eye_Diagram", "Test_Jitter", ...] # All required tests
+    
+    current_dut_params = dut.get_default_params()
+    
+    # Step 3-4: Initial Run
+    scope.select_tests(test_list)
+    scope.run()
+    results = scope.get_results()
+    
+    if is_all_pass(results):
+        # Step 5: Success immediately
+        scope.save_project()
+        scope.export_pdf()
+        return
+
+    # Step 6-8: Failure Handling (Sweep)
+    failed_tests = get_failed_items(results)
+    sweep_strategy = load_sweep_strategy()
+    
+    golden_params = None
+    
+    # Try to fix the FIRST failed item first (simplification strategy)
+    # assuming one setting fixes all, or negotiate per lane
+    
+    for param in sweep_strategy:
+        print(f"Retrying with DUT params: {param}")
+        dut.write_registers(param) # Step 6
+        
+        # Step 7: Retest ONLY failed items initially to save time? 
+        # Or retest specific failed item to verify fix?
+        # Requirement says: "Retest failed items"
+        scope.select_tests(failed_tests)
+        scope.run()
+        new_results = scope.get_results()
+        
+        if is_all_pass(new_results):
+            golden_params = param
+            break # Found a fix!
+            
+    if golden_params is None:
+        print("Error: Exhausted all parameters, DUT failed.")
+        return # Stop or continue to report failure
+        
+    # Step 9: Regression Test with Golden Params
+    print("Fix found! Running FULL regression with new params...")
+    scope.select_tests(test_list) # Select ALL tests again
+    scope.run()
+    final_results = scope.get_results()
+    
+    # Step 10: Final Report
+    if is_all_pass(final_results):
+        print("Regression Passed!")
+        save_final_params(golden_params)
+        scope.save_project()
+        scope.export_pdf()
+    else:
+        print("Regression Failed even with new params.")
+```
+
+---
+def smart_tuning_process():
+    # Setup & Initial Run
+    scope.run_all_tests()
+    results = scope.get_results()
+    
+    # 用一個 Set 紀錄曾經嘗試過的參數組合，避免無窮迴圈
+    tried_params_history = set() 
+    
+    while not is_all_pass(results):
+        # 1. 分析失敗項目
+        failed_items = get_failed_items(results)
+        
+        # 2. 決定當前要解決的主要問題 (根據 Priority)
+        # 例如：優先解決 Link Training 失敗，其次 Jitter，最後是 Eye Diagram
+        primary_failure = select_highest_priority_failure(failed_items)
+        
+        print(f"Addressing Failure: {primary_failure.test_name}")
+        
+        # 3. 獲取該問題對應的參數策略
+        # e.g., Jitter -> Strategy_A (Pre-emphasis)
+        strategy_list = get_strategy_for_test(primary_failure.test_id)
+        
+        # 4. 挑選下一個參數
+        next_params = get_next_untried_param(strategy_list, tried_params_history)
+        
+        if next_params is None:
+            print("Critical: All strategies exhausted for this failure type.")
+            break # 無法修復
+            
+        # 5. 執行調整
+        dut.write_registers(next_params)
+        tried_params_history.add(next_params)
+        
+        # 6. 驗證 (Verify Fix) - 先只跑剛才失敗的那個項目，節省時間
+        scope.select_tests([primary_failure.test_id])
+        scope.run()
+        verify_result = scope.get_results()
+        
+        if is_pass(verify_result):
+            # 7. 如果單項修復成功，執行全項目回歸測試 (Regression)
+            # 確保這個參數沒有把原本 Pass 的項目弄壞
+            print("Fix verified. Running Full Regression...")
+            scope.select_all_tests()
+            scope.run()
+            results = scope.get_results() # 更新主迴圈的 results
+        else:
+            # 該參數無效，While loop 繼續，嘗試 strategy_list 的下一個參數
+            print("Fix failed, trying next parameter...")
+            pass
+
+    # End of Loop
+    if is_all_pass(results):
+        scope.save_project()
+        scope.export_pdf()
+        save_golden_parameters(dut.current_params)
+    else:
+        print("Test Failed after all attempts.")

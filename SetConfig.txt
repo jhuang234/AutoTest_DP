@@ -1,0 +1,186 @@
+Select the connector type of the DUT, either 'Standard DP/mDP' or 'USB Type-C'. Note: The connector type will affects
+the cable model used for TP3 (TP3_CTLE / TP3_EQ) tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'ConnectorType'
+
+SetConfig 'ConnectorType' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    USB Type-C
+    Enhanced FsDP
+    Enhanced mDP
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'ConnectorType'
+
+----- Note -----
+Select the connector type of the DUT, either 'Standard DP/mDP' or 'USB Type-C'. Note: The connector type will affects
+the cable model used for TP3 (TP3_CTLE / TP3_EQ) tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+
+Select the test lane of the DUT, either 'Lane 0 and Lane 1' or 'Lane 2 and Lane 3'.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'DUTLaneCount'
+
+SetConfig 'DUTLaneCount' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    1 Lane
+    2 Lanes
+    4 Lanes
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'DUTLaneCount'
+
+----- Note -----
+Select the test lane of the DUT, either 'Lane 0 and Lane 1' or 'Lane 2 and Lane 3'.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+Enable or disable SSC Support
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsSSCSupported'
+
+SetConfig 'IsSSCSupported' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsSSCSupported'
+
+----- Note -----
+Enable or disable SSC Support
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+Select if re-timer is attached.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsRetimerAttached'
+
+SetConfig 'IsRetimerAttached' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsRetimerAttached'
+
+----- Note -----
+Select if re-timer is attached.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+Select the type of Automation Controller.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'AutomationController'
+
+SetConfig 'AutomationController' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    TCPIP
+    Unigraf_UCD_323_G2
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'AutomationController'
+
+----- Note -----
+Select the type of Automation Controller.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+Enable or disable the use of Automation Controller.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'AutomationEnable'
+
+SetConfig 'AutomationEnable' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'AutomationEnable'
+
+----- Note -----
+Enable or disable the use of Automation Controller.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+Identifier for the DUT in testing.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'DeviceIdentifier'
+
+SetConfig 'DeviceIdentifier' '<value>'
+
+----- Parameters -----
+<value> = (Accepts user-defined text)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'DeviceIdentifier'
+
+----- Note -----
+Identifier for the DUT in testing.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Short description for the DUT in testing.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'UserDescription'
+
+SetConfig 'UserDescription' '<value>'
+
+----- Parameters -----
+<value> = (Accepts user-defined text)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'UserDescription'
+
+----- Note -----
+Short description for the DUT in testing.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).

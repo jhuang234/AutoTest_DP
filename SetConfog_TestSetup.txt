@@ -1,0 +1,403 @@
+Enable or disable predefined optimum Preset Number for TP2 tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP2PresetNumber'
+
+SetConfig 'PredefinedTP2PresetNumber' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP2PresetNumber'
+
+----- Note -----
+Enable or disable predefined optimum Preset Number for TP2 tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 0. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 0.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP2PresetNumber10GbpsLane0'
+
+SetConfig 'PredefinedTP2PresetNumber10GbpsLane0' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    P0
+    P1
+    P2
+    P3
+    P4
+    P5
+    P6
+    P7
+    P8
+    P9
+    P10
+    P11
+    P12
+    P13
+    P14
+    P15
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP2PresetNumber10GbpsLane0'
+
+----- Note -----
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 0. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 0.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 1. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 1.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP2PresetNumber10GbpsLane1'
+
+SetConfig 'PredefinedTP2PresetNumber10GbpsLane1' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    P0
+    P1
+    P2
+    P3
+    P4
+    P5
+    P6
+    P7
+    P8
+    P9
+    P10
+    P11
+    P12
+    P13
+    P14
+    P15
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP2PresetNumber10GbpsLane1'
+
+----- Note -----
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 1. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 1.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 2. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 2.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP2PresetNumber10GbpsLane2'
+
+SetConfig 'PredefinedTP2PresetNumber10GbpsLane2' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    P0
+    P1
+    P2
+    P3
+    P4
+    P5
+    P6
+    P7
+    P8
+    P9
+    P10
+    P11
+    P12
+    P13
+    P14
+    P15
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP2PresetNumber10GbpsLane2'
+
+----- Note -----
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 2. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 2.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 3. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 3.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP2PresetNumber10GbpsLane3'
+
+SetConfig 'PredefinedTP2PresetNumber10GbpsLane3' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    P0
+    P1
+    P2
+    P3
+    P4
+    P5
+    P6
+    P7
+    P8
+    P9
+    P10
+    P11
+    P12
+    P13
+    P14
+    P15
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP2PresetNumber10GbpsLane3'
+
+----- Note -----
+Select the predefined optimum Preset Number for bit rate 10 Gbps TP2 tests of Lane 3. The optimum Preset Number will
+be used to run the bit rate 10 Gbps TP2 tests of Lane 3.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+
+
+
+Enable or disable the run of preset calibration to find the optimum Preset Number for TP2 tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'RunTP2PresetCalibration'
+
+SetConfig 'RunTP2PresetCalibration' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'RunTP2PresetCalibration'
+
+----- Note -----
+Enable or disable the run of preset calibration to find the optimum Preset Number for TP2 tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable the run of preset calibration to find the optimum Preset Number for TP2 tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'RunTP2PresetCalibration'
+
+SetConfig 'RunTP2PresetCalibration' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'RunTP2PresetCalibration'
+
+----- Note -----
+Enable or disable the run of preset calibration to find the optimum Preset Number for TP2 tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Enable or disable Preset Number 0 for the TP2 Preset Calibration run.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'TP2_P0'
+
+SetConfig 'TP2_P0' '<value>'
+
+
+TP2_P1.. TP2_P15.
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'TP2_P0'
+
+----- Note -----
+Enable or disable Preset Number 0 for the TP2 Preset Calibration run.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+
+Enable or disable predefined optimum Preset Number for TP3 (TP3_CTLE / TP3_EQ) tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP3PresetNumber'
+
+SetConfig 'PredefinedTP3PresetNumber' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP3PresetNumber'
+
+----- Note -----
+Enable or disable predefined optimum Preset Number for TP3 (TP3_CTLE / TP3_EQ) tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable the run of preset calibration to find the optimum Preset Number for TP3 (TP3_CTLE / TP3_EQ) tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'RunTP3PresetCalibration'
+
+SetConfig 'RunTP3PresetCalibration' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'RunTP3PresetCalibration'
+
+----- Note -----
+Enable or disable the run of preset calibration to find the optimum Preset Number for TP3 (TP3_CTLE / TP3_EQ) tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Preset Number 0 for the TP3 Preset and Equalization Calibration run.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'TP3_P0'
+
+SetConfig 'TP3_P0' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'TP3_P0'
+
+----- Note -----
+Enable or disable Preset Number 0 for the TP3 Preset and Equalization Calibration run.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Enable or disable predefined optimum CTLE DC Gain for TP3 (TP3_CTLE / TP3_EQ) tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'PredefinedTP3CTLEDCGain'
+
+SetConfig 'PredefinedTP3CTLEDCGain' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'PredefinedTP3CTLEDCGain'
+
+----- Note -----
+Enable or disable predefined optimum CTLE DC Gain for TP3 (TP3_CTLE / TP3_EQ) tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Enable or disable the run of CTLE calibration to find the optimum CTLE DC Gain for TP3 (TP3_CTLE / TP3_EQ) tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'RunTP3CTLECalibration'
+
+SetConfig 'RunTP3CTLECalibration' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'RunTP3CTLECalibration'
+
+----- Note -----
+Enable or disable the run of CTLE calibration to find the optimum CTLE DC Gain for TP3 (TP3_CTLE / TP3_EQ) tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Enable or disable 0dB CTLE DC Gain for the TP3 Preset and Equalization Calibration run.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'TP3_DC0dB'
+
+SetConfig 'TP3_DC0dB' '<value>'
+
+'TP3_DC1dB',.....TP3_DC9dB
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'TP3_DC0dB'
+
+----- Note -----
+Enable or disable 0dB CTLE DC Gain for the TP3 Preset and Equalization Calibration run.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+Enable or disable fixture de-embed to remove the losses.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'EnableFixtureDeEmbed'
+
+SetConfig 'EnableFixtureDeEmbed' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'EnableFixtureDeEmbed'
+
+----- Note -----
+Enable or disable fixture de-embed to remove the losses.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).

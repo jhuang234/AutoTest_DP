@@ -1,0 +1,324 @@
+Select the connection type between DUT and Scope. Either 'SingleEnded'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'ConnectionType'
+
+SetConfig 'ConnectionType' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Differential
+    Single Ended
+    Switch Matrix
+    Common
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'ConnectionType'
+
+----- Note -----
+Select the connection type between DUT and Scope. Either 'SingleEnded'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Select if Lane 0 is selected for test. Either '1.0' or '0.0'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsLane0Selected'
+
+SetConfig 'IsLane0Selected' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsLane0Selected'
+
+----- Note -----
+Select if Lane 0 is selected for test. Either '1.0' or '0.0'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select if Lane 1 is selected for test. Either '1.0' or '0.0'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsLane1Selected'
+
+SetConfig 'IsLane1Selected' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsLane1Selected'
+
+----- Note -----
+Select if Lane 1 is selected for test. Either '1.0' or '0.0'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select if Lane 3 is selected for test. Either '1.0' or '0.0'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsLane3Selected'
+
+SetConfig 'IsLane3Selected' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsLane3Selected'
+
+----- Note -----
+Select if Lane 3 is selected for test. Either '1.0' or '0.0'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select if Lane 2 is selected for test. Either '1.0' or '0.0'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsLane2Selected'
+
+SetConfig 'IsLane2Selected' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsLane2Selected'
+
+----- Note -----
+Select if Lane 2 is selected for test. Either '1.0' or '0.0'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Choose Lane Number for Lane A. Either 'L0', 'L1', 'L2' or 'L3'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedLaneA'
+
+SetConfig 'SelectedLaneA' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Lane 0
+    Lane 1
+    Lane 2
+    Lane 3
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedLaneA'
+
+----- Note -----
+Choose Lane Number for Lane A. Either 'L0', 'L1', 'L2' or 'L3'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Choose Channel Number for Channel A. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedChannelA'
+
+SetConfig 'SelectedChannelA' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    CHAN1
+    CHAN2
+    CHAN3
+    CHAN4
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedChannelA'
+
+----- Note -----
+Choose Channel Number for Channel A. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Choose Lane Number for Lane B. Either 'L0', 'L1', 'L2' or 'L3'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedLaneB'
+
+SetConfig 'SelectedLaneB' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Lane 0
+    Lane 1
+    Lane 2
+    Lane 3
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedLaneB'
+
+----- Note -----
+Choose Lane Number for Lane B. Either 'L0', 'L1', 'L2' or 'L3'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Choose Channel Number for Channel B. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedChannelB'
+
+SetConfig 'SelectedChannelB' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    CHAN1
+    CHAN2
+    CHAN3
+    CHAN4
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedChannelB'
+
+----- Note -----
+Choose Channel Number for Channel B. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Choose Lane Number for Lane C. Either 'L0', 'L1', 'L2' or 'L3'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedLaneC'
+
+SetConfig 'SelectedLaneC' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Lane 0
+    Lane 1
+    Lane 2
+    Lane 3
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedLaneC'
+
+----- Note -----
+Choose Lane Number for Lane C. Either 'L0', 'L1', 'L2' or 'L3'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Choose Channel Number for Channel C. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedChannelC'
+
+SetConfig 'SelectedChannelC' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    CHAN1
+    CHAN2
+    CHAN3
+    CHAN4
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedChannelC'
+
+----- Note -----
+Choose Channel Number for Channel C. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Choose Lane Number for Lane D. Either 'L0', 'L1', 'L2' or 'L3'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedLaneD'
+
+SetConfig 'SelectedLaneD' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Lane 0
+    Lane 1
+    Lane 2
+    Lane 3
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedLaneD'
+
+----- Note -----
+Choose Lane Number for Lane D. Either 'L0', 'L1', 'L2' or 'L3'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Choose Channel Number for Channel D. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SelectedChannelD'
+
+SetConfig 'SelectedChannelD' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    CHAN1
+    CHAN2
+    CHAN3
+    CHAN4
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SelectedChannelD'
+
+----- Note -----
+Choose Channel Number for Channel D. Either 'CHAN1', 'CHAN2', 'CHAN3' or 'CHAN4'
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Completes connection setup and apply the settings to the app
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'CompleteConnectionSetup'
+
+SetConfig 'CompleteConnectionSetup' '<value>'
+
+----- Parameters -----
+<value> = 1
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'CompleteConnectionSetup'
+
+----- Note -----
+Completes connection setup and apply the settings to the app
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
