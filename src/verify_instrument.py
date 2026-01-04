@@ -129,10 +129,12 @@ def test_instrument_control():
         print(f"  ID: {r['test_id']}, Pass: {r['passed']}, Margin: {r['margin']}")
 
     logger.info("--- Testing Save Project ---")
-    scope.save_project("VerifiedProject")
+    scope.save_project("C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects\\VerifiedProject")
+    
     
     logger.info("--- Testing Export PDF ---")
-    scope.export_pdf("C:\\proj\\AutoTest_DP\\Report.pdf")
+    scope.export_pdf("C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects\\Report.pdf")
+
     
 
 
