@@ -1,0 +1,61 @@
+{
+    "common_settings": {
+        "instrument_ip": "10.144.211.47",
+        "dut_server_ip": "10.144.217.79",
+        "dut_server_port": 13000,
+        "default_test_ids": [
+            119041,
+            119042,
+            119043,
+            119044,
+            119132
+        ]
+    },
+    "runs": [
+        {
+            "name": "Run_1_LowSwing",
+            "dut_commands": [
+                "write_register(0x7c, 0x15, 0x01)",
+                "write_register(0x7c, 0x17, 0xEE)",
+                "write_register(0x7c, 0x2b, 0xEE)",
+                "write_register(0x7c, 0x3f, 0xEE)",
+                "write_register(0x7c, 0x53, 0xEE)",
+                "eq 15",
+                "sw 2",
+                "fg 0"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ15_SW2_FG0_0xEE",
+            "report_name": "hp_Paya_HPT_J61_EQ15_SW2_FG0_0xEE.pdf"
+        },
+        {
+            "name": "Run_2_HighSwing",
+            "dut_commands": [
+                "write_register(0x7c, 0x15, 0x01)",
+                "write_register(0x7c, 0x17, 0xEE)",
+                "write_register(0x7c, 0x2b, 0xEE)",
+                "write_register(0x7c, 0x3f, 0xEE)",
+                "write_register(0x7c, 0x53, 0xEE)",
+                "eq 15",
+                "sw 3",
+                "fg 0"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ15_SW3_FG0_0xEE",
+            "report_name": "hp_Paya_HPT_J61_EQ15_SW3_FG0_0xEE.pdf"
+        },
+        {
+            "name": "Run_3_HighMEQ",
+            "dut_commands": [
+                "write_register(0x7c, 0x15, 0x01)",
+                "write_register(0x7c, 0x17, 0xFF)",
+                "write_register(0x7c, 0x2b, 0xFF)",
+                "write_register(0x7c, 0x3f, 0xFF)",
+                "write_register(0x7c, 0x53, 0xFF)",
+                "eq 15",
+                "sw 2",
+                "fg 0"
+            ],
+            "project_name": "hp_Paya_HPT_J61_EQ15_SW2_FG0_0xFF",
+            "report_name": "hp_Paya_HPT_J61_EQ15_SW2_FG0_0xFF.pdf"
+        }
+    ]
+}

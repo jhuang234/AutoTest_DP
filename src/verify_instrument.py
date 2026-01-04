@@ -96,28 +96,33 @@ else:
 
 # --- VERIFICATION TEST ---
 
-def test_instrument_control():
-    ip_address = "10.144.211.47" # Default from TMDS.py
-    
+def run_instrument_tests(ip_address, project_name, report_path, test_ids, config_path=None):
+    """
+    Executes instrument tests based on provided parameters.
+    Returns the results list.
+    """
+    if config_path is None:
+        # Default to file in the same directory if not provided
+        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'full_config.json')
+
+    logger.info(f"--- Starting Instrument Tests: {project_name} ---")
     logger.info("--- Initializing Controller ---")
     scope = KeysightController(ip_address, logger=logger)
     
     logger.info("--- Testing Connect ---")
     if not scope.connect():
         logger.error("Failed to connect. Aborting test.")
-        return
+        return []
 
     logger.info("--- Testing Create New Project ---")
     # Create new project instead of loading one
     scope.create_new_project()
     
     logger.info("--- Testing Load Config ---")
-    # Use absolute path tailored to script location
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'full_config.json')
     scope.load_config_file(config_path)
     
     logger.info("--- Testing Select Tests ---")
-    scope.select_tests([119042])
+    scope.select_tests(test_ids)
     
     logger.info("--- Testing Run Tests ---")
     scope.run_tests()
@@ -129,16 +134,42 @@ def test_instrument_control():
         print(f"  ID: {r['test_id']}, Pass: {r['passed']}, Margin: {r['margin']}")
 
     logger.info("--- Testing Save Project ---")
-    scope.save_project("C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects\\VerifiedProject")
+    # Construct full path if only name is given, or use as is
+    # Here we assume project_name is a name or partial path
+    # For standalone test, we used a full path. 
+    # Let's handle it: if it's absolute, use it. If not, save to current dir or specific folder?
+    # spec says "saving different project name". 
+    # Let's save to a "Projects" subdirectory for cleaner output if a full path isn't provided.
+    
+    if os.path.isabs(project_name):
+         save_path = project_name
+    else:
+         save_path = os.path.join(os.getcwd(), "Projects", project_name)
+         os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+    scope.save_project(save_path)
     
     
     logger.info("--- Testing Export PDF ---")
-    scope.export_pdf("C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects\\Report.pdf")
+    if os.path.isabs(report_path):
+        final_report_path = report_path
+    else:
+        final_report_path = os.path.join(os.getcwd(), "Reports", report_path)
+        os.makedirs(os.path.dirname(final_report_path), exist_ok=True)
 
-    
-
+    scope.export_pdf(final_report_path)
 
     logger.info("--- Verification Complete ---")
+    return results
+
+def test_instrument_control():
+    # Default values for standalone run
+    ip_address = "10.144.211.47"
+    project_name = "C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects\\VerifiedProject"
+    report_path = "C:\\Users\\Administrator\\Desktop\\Jason\\OneDrive - ANALOGIX\\HDMI_projects\\Report.pdf"
+    test_ids = [119042]
+    
+    run_instrument_tests(ip_address, project_name, report_path, test_ids)
 
 if __name__ == "__main__":
     test_instrument_control()
