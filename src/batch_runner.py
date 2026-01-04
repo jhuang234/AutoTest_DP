@@ -100,17 +100,25 @@ def run_batch(config_path):
         logger.info(f"[{run_name}] Run Complete. Duration: {run_duration:.2f}s\n")
 
         # 3. Collect Results
-        for res in run_results:
-            results_summary.append({
+        if not run_results:
+             results_summary.append({
                 "Run": run_name,
-                "TestID": res['test_id'],
-                "Pass": res['passed'],
-                "Margin": res['margin'],
-                "Duration": run_duration
+                "TestID": "Error",
+                "Pass": False,
+                "Margin": "N/A",
+                "Duration": run_duration,
+                "Error": True
             })
+        else:
+            for res in run_results:
+                results_summary.append({
+                    "Run": run_name,
+                    "TestID": res['test_id'],
+                    "Pass": res['passed'],
+                    "Margin": res['margin'],
+                    "Duration": run_duration
+                })
             
-    total_duration = time.time() - start_time_total
-        
     total_duration = time.time() - start_time_total
         
     # 4. Print Summary
@@ -133,7 +141,16 @@ def run_batch(config_path):
         
         items = run_map.get(r_name, [])
         if not items:
+            print(f"{r_name:<30} | {'0 / 0':<12} | {'❌ Skipped':<15} | {'0.00':<16} | {'Run skipped or output missing'}")
             continue
+
+        # Check for execution error
+        if len(items) == 1 and items[0].get('Error'):
+             status = "❌ Exec Error"
+             duration = items[0]['Duration']
+             obs = "Instrument test failed to execute (Check logs)"
+             print(f"{r_name:<30} | {'0 / 0':<12} | {status:<15} | {duration:<16.2f} | {obs}")
+             continue
 
         total = len(items)
         passed = sum(1 for x in items if x['Pass'])
