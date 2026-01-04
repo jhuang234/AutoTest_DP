@@ -22,7 +22,7 @@ def main():
     time.sleep(1)
     
     # 2. Start Client
-    client = DutControlClient(server_ip='127.0.0.1', server_port=13001, logger=logger)
+    client = DutControlClient(server_ip='10.144.217.79', server_port=13000, logger=logger)
     
     # 3. Test Write
     logger.info("--- Testing Write ---")

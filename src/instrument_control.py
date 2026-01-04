@@ -204,16 +204,26 @@ class KeysightController:
             self.logger.error(f"Failed to get results: {e}")
             return []
 
-    def save_project(self, save_as_name=None):
+    def save_project(self, save_as_path=None):
         if not self.is_connected: return False
         try:
             opts = SaveProjectOptions()
             opts.OverwriteExisting = True
-            if save_as_name:
-                opts.Name = save_as_name
-            # If base directory is needed, set it here. For now assume default.
+            
+            if save_as_path:
+                # Handle full path vs just name
+                directory, filename = os.path.split(save_as_path)
+                
+                # Sanitize filename (remove invalid characters: \ / : * ? " < > |)
+                # Modeled after TMDS.py sanitize_name
+                filename = "".join(c for c in filename if c not in r'\/:*?"<>|')
+                
+                if directory:
+                    opts.BaseDirectory = directory
+                opts.Name = filename
+            
             self.remote_app.SaveProjectCustom(opts)
-            self.logger.info("Project saved.")
+            self.logger.info(f"Project saved to {save_as_path}")
             return True
         except Exception as e:
             self.logger.error(f"Failed to save project: {e}")
