@@ -3,6 +3,7 @@ import os
 import sys
 import logging
 import time
+import datetime
 
 # Ensure src is in path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -87,6 +88,12 @@ def run_batch(config_path):
         logger.info(f"[{run_name}] Running Instrument Tests...")
         project_name = run.get("project_name")
         report_name = run.get("report_name")
+        
+        # Add timestamp to report name
+        if report_name:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
+            name, ext = os.path.splitext(report_name)
+            report_name = f"{name}_{timestamp}{ext}"
         test_ids = run.get("test_ids", default_test_ids)
         
         # We need to assume a config path for the instrument run. 
@@ -112,6 +119,7 @@ def run_batch(config_path):
         if not run_results:
              results_summary.append({
                 "Run": run_name,
+                "ReportName": report_name,
                 "TestID": "Error",
                 "Pass": False,
                 "Margin": "N/A",
@@ -122,6 +130,7 @@ def run_batch(config_path):
             for res in run_results:
                 results_summary.append({
                     "Run": run_name,
+                    "ReportName": report_name,
                     "TestID": res['test_id'],
                     "Pass": res['passed'],
                     "Margin": res['margin'],
@@ -132,8 +141,8 @@ def run_batch(config_path):
         
     # 4. Print Summary
     print(f"\nTotal Duration: {total_duration:.2f} s\n")
-    print(f"{'Run':<30} | {'Pass / Total':<12} | {'Status':<15} | {'Avg Duration (s)':<16} | {'Key Observation'}")
-    print("-" * 110)
+    print(f"{'Report File':<80} | {'Pass / Total':<12} | {'Status':<15} | {'Avg Duration (s)':<16} | {'Key Observation'}")
+    print("-" * 160)
 
     # Group results by Run
     from collections import defaultdict
@@ -150,21 +159,23 @@ def run_batch(config_path):
         
         items = run_map.get(r_name, [])
         if not items:
-            print(f"{r_name:<30} | {'0 / 0':<12} | {'❌ Skipped':<15} | {'0.00':<16} | {'Run skipped or output missing'}")
-            continue
+             print(f"{r_name:<80} | {'0 / 0':<12} | {'❌ Skipped':<15} | {'0.00':<16} | {'Run skipped or output missing'}")
+             continue
 
         # Check for execution error
         if len(items) == 1 and items[0].get('Error'):
              status = "❌ Exec Error"
              duration = items[0]['Duration']
+             rep_name = items[0].get('ReportName', r_name)
              obs = "Instrument test failed to execute (Check logs)"
-             print(f"{r_name:<30} | {'0 / 0':<12} | {status:<15} | {duration:<16.2f} | {obs}")
+             print(f"{rep_name:<80} | {'0 / 0':<12} | {status:<15} | {duration:<16.2f} | {obs}")
              continue
 
         total = len(items)
         passed = sum(1 for x in items if x['Pass'])
         failed_ids = [str(x['TestID']) for x in items if not x['Pass']]
         duration = items[0]['Duration']  # Run duration is same for all items in run
+        rep_name = items[0].get('ReportName', r_name)
         
         # Determine Status and Observation
         if passed == total and total > 0:
@@ -184,7 +195,7 @@ def run_batch(config_path):
                      ids_str = ids_str[:27] + "..."
                 obs = f"Failures on {ids_str}"
 
-        print(f"{r_name:<30} | {f'{passed} / {total}':<12} | {status:<15} | {duration:<16.2f} | {obs}")
+        print(f"{rep_name:<80} | {f'{passed} / {total}':<12} | {status:<15} | {duration:<16.2f} | {obs}")
     print("==================================================")
 
 if __name__ == "__main__":
