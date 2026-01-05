@@ -52,6 +52,9 @@ def run_batch(config_path):
         # 1. Configure DUT
         logger.info(f"[{run_name}] Configuring DUT...")
         for cmd in run.get("dut_commands", []):
+            if cmd.strip().startswith("//") or cmd.strip().startswith("#"):
+                continue
+
             logger.info(f"  Sending: {cmd}")
             # Check if it is a write_register convenience string or raw command
             if "write_register" in cmd:
