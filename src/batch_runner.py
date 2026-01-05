@@ -12,9 +12,15 @@ from verify_instrument import run_instrument_tests
 from dut_control_client import DutControlClient
 
 # Configure logging
+
+log_file = os.path.join(os.path.dirname(__file__), '..', 'batch_runner.log')
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file, mode='w'),
+        logging.StreamHandler(sys.stdout)
+    ]
 )
 logger = logging.getLogger("BatchRunner")
 

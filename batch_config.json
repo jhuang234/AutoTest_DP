@@ -61,6 +61,33 @@
     ],
     "runs": [
         {
+            "name": "Run_5_HighSwing_Term90",
+            "dut_commands": [
+                "write_register(0x7c, 0x4B, 0x3A)",
+                "write_register(0x7c, 0x37, 0x3A)",
+                "write_register(0x7c, 0x5F, 0x3A)",
+                "write_register(0x7c, 0x23, 0x3A)",
+                "write_register(0x7c, 0x15, 0x01)",
+                "write_register(0x7c, 0x18, 0xDE)",
+                "write_register(0x7c, 0x16, 0xF3)",
+                "write_register(0x7c, 0x2C, 0xDE)",
+                "write_register(0x7c, 0x2A, 0xF3)",
+                "write_register(0x7c, 0x40, 0xDE)",
+                "write_register(0x7c, 0x3E, 0xF3)",
+                "write_register(0x7c, 0x54, 0xDE)",
+                "write_register(0x7c, 0x52, 0xF3)",
+                "write_register(0x7c, 0x1A, 0x51)",
+                "write_register(0x7c, 0x2E, 0x51)",
+                "write_register(0x7c, 0x42, 0x51)",
+                "write_register(0x7c, 0x56, 0x51)",
+                "eq 15",
+                "sw 1",
+                "fg 1"
+            ],
+            "project_name": "0105_hp_Paya_HPT_J61_EQ15_SW1_FG1_0xEE_Term90",
+            "report_name": "0105_hp_Paya_HPT_J61_EQ15_SW1_FG1_0xEE_Term90.pdf"
+        },
+        {
             "name": "Run_7_HighSwing_Term110",
             "dut_commands": [
                 "write_register(0x7c, 0x4B, 0xAA)",
@@ -94,8 +121,7 @@
                 "write_register(0x7c, 0x37, 0x3A)",
                 "write_register(0x7c, 0x5F, 0x3A)",
                 "write_register(0x7c, 0x23, 0x3A)",
-                "write_register(0x7c, 0x15, 0x00)",
-                "//default value",
+                "write_register(0x7c, 0x15, 0x01)",
                 "write_register(0x7c, 0x18, 0xEE)",
                 "//default value",
                 "write_register(0x7c, 0x16, 0xC3)",
@@ -128,41 +154,13 @@
             "report_name": "hp_Paya_HPT_J61_EQ10_SW2_FG1_0xEE_Term90.pdf"
         },
         {
-            "name": "Run_5_HighSwing_Term90",
-            "dut_commands": [
-                "write_register(0x7c, 0x4B, 0x3A)",
-                "write_register(0x7c, 0x37, 0x3A)",
-                "write_register(0x7c, 0x5F, 0x3A)",
-                "write_register(0x7c, 0x23, 0x3A)",
-                "write_register(0x7c, 0x15, 0x01)",
-                "write_register(0x7c, 0x18, 0xDE)",
-                "write_register(0x7c, 0x16, 0xA3)",
-                "write_register(0x7c, 0x2C, 0xDE)",
-                "write_register(0x7c, 0x2A, 0xA3)",
-                "write_register(0x7c, 0x40, 0xDE)",
-                "write_register(0x7c, 0x3E, 0xA3)",
-                "write_register(0x7c, 0x54, 0xDE)",
-                "write_register(0x7c, 0x52, 0xA3)",
-                "write_register(0x7c, 0x1A, 0x51)",
-                "write_register(0x7c, 0x2E, 0x51)",
-                "write_register(0x7c, 0x42, 0x51)",
-                "write_register(0x7c, 0x56, 0x51)",
-                "eq 10",
-                "sw 1",
-                "fg 1"
-            ],
-            "project_name": "hp_Paya_HPT_J61_EQ10_SW1_FG1_0xEE_Term90",
-            "report_name": "hp_Paya_HPT_J61_EQ10_SW1_FG1_0xEE_Term90.pdf"
-        },
-        {
             "name": "Run_6_HighSwing_Term110",
             "dut_commands": [
                 "write_register(0x7c, 0x4B, 0xAA)",
                 "write_register(0x7c, 0x37, 0xAA)",
                 "write_register(0x7c, 0x5F, 0xAA)",
                 "write_register(0x7c, 0x23, 0xAA)",
-                "write_register(0x7c, 0x15, 0x00)",
-                "//default value",
+                "write_register(0x7c, 0x15, 0x01)",
                 "write_register(0x7c, 0x18, 0xEE)",
                 "//default value",
                 "write_register(0x7c, 0x16, 0xC3)",
