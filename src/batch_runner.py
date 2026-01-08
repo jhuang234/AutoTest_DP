@@ -83,6 +83,19 @@ def run_batch(config_path):
             logger.info(f"  Response: {resp}")
             if "Error" in str(resp):
                 logger.warning(f"  Command failed, continuing run anyway...")
+        
+        # Extract EQ, SW, FG for summary
+        eq_val, sw_val, fg_val = "-", "-", "-"
+        for cmd in run.get("dut_commands", []):
+            try:
+                parts = cmd.strip().split()
+                if len(parts) >= 2:
+                    key = parts[0].lower()
+                    val = parts[1]
+                    if key == "eq": eq_val = val
+                    elif key == "sw": sw_val = val
+                    elif key == "fg": fg_val = val
+            except: pass
 
         # 2. Run Instrument Tests
         logger.info(f"[{run_name}] Running Instrument Tests...")
@@ -120,6 +133,7 @@ def run_batch(config_path):
              results_summary.append({
                 "Run": run_name,
                 "ReportName": report_name,
+                "EQ": eq_val, "SW": sw_val, "FG": fg_val,
                 "TestID": "Error",
                 "Pass": False,
                 "Margin": "N/A",
@@ -131,6 +145,7 @@ def run_batch(config_path):
                 results_summary.append({
                     "Run": run_name,
                     "ReportName": report_name,
+                    "EQ": eq_val, "SW": sw_val, "FG": fg_val,
                     "TestID": res['test_id'],
                     "Pass": res['passed'],
                     "Margin": res['margin'],
@@ -141,8 +156,8 @@ def run_batch(config_path):
         
     # 4. Print Summary
     print(f"\nTotal Duration: {total_duration:.2f} s\n")
-    print(f"{'Report File':<80} | {'Pass / Total':<12} | {'Status':<15} | {'Avg Duration (s)':<16} | {'Key Observation'}")
-    print("-" * 160)
+    print(f"{'Report File':<80} | {'EQ':<4} | {'SW':<4} | {'FG':<4} | {'Pass / Total':<12} | {'Status':<15} | {'Avg Duration (s)':<16} | {'Key Observation'}")
+    print("-" * 180)
 
     # Group results by Run
     from collections import defaultdict
@@ -159,7 +174,7 @@ def run_batch(config_path):
         
         items = run_map.get(r_name, [])
         if not items:
-             print(f"{r_name:<80} | {'0 / 0':<12} | {'❌ Skipped':<15} | {'0.00':<16} | {'Run skipped or output missing'}")
+             print(f"{r_name:<80} | {'-':<4} | {'-':<4} | {'-':<4} | {'0 / 0':<12} | {'❌ Skipped':<15} | {'0.00':<16} | {'Run skipped or output missing'}")
              continue
 
         # Check for execution error
@@ -167,8 +182,9 @@ def run_batch(config_path):
              status = "❌ Exec Error"
              duration = items[0]['Duration']
              rep_name = items[0].get('ReportName', r_name)
+             eq, sw, fg = items[0].get('EQ', '-'), items[0].get('SW', '-'), items[0].get('FG', '-')
              obs = "Instrument test failed to execute (Check logs)"
-             print(f"{rep_name:<80} | {'0 / 0':<12} | {status:<15} | {duration:<16.2f} | {obs}")
+             print(f"{rep_name:<80} | {eq:<4} | {sw:<4} | {fg:<4} | {'0 / 0':<12} | {status:<15} | {duration:<16.2f} | {obs}")
              continue
 
         total = len(items)
@@ -176,6 +192,7 @@ def run_batch(config_path):
         failed_ids = [str(x['TestID']) for x in items if not x['Pass']]
         duration = items[0]['Duration']  # Run duration is same for all items in run
         rep_name = items[0].get('ReportName', r_name)
+        eq, sw, fg = items[0].get('EQ', '-'), items[0].get('SW', '-'), items[0].get('FG', '-')
         
         # Determine Status and Observation
         if passed == total and total > 0:
@@ -195,7 +212,7 @@ def run_batch(config_path):
                      ids_str = ids_str[:27] + "..."
                 obs = f"Failures on {ids_str}"
 
-        print(f"{rep_name:<80} | {f'{passed} / {total}':<12} | {status:<15} | {duration:<16.2f} | {obs}")
+        print(f"{rep_name:<80} | {eq:<4} | {sw:<4} | {fg:<4} | {f'{passed} / {total}':<12} | {status:<15} | {duration:<16.2f} | {obs}")
     print("==================================================")
 
 if __name__ == "__main__":

@@ -130,6 +130,21 @@ class KeysightController:
             self.logger.error(f"Failed to select tests: {e}")
             return False
 
+    def set_run_repetition(self, count=3):
+        """Sets the repetition count for the test run."""
+        if not self.is_connected: return False
+        try:
+            self.logger.info(f"Setting run repetition to {count} times")
+            if count > 1:
+                self.remote_app.SetConfig("RunRepetition", "N Times")
+            else:
+                self.remote_app.SetConfig("RunRepetition", "Once")
+            self.remote_app.SetConfig("NumRuns", str(count))
+            return True
+        except Exception as e:
+            self.logger.error(f"Failed to set run repetition: {e}")
+            return False
+
     def run_tests(self):
         """Starts the execution of selected tests."""
         if not self.is_connected: return False
@@ -141,7 +156,7 @@ class KeysightController:
             self.logger.error(f"Failed to start tests: {e}")
             return False
 
-    def waitt_for_completion(self, poll_interval=2):
+    def wait_for_completion(self, poll_interval=2):
         """
         Polls the status until the test is finished.
         Note: The .NET Remote Interface usually blocks on Run() if using certain modes, 
