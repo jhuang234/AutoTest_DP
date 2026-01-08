@@ -136,9 +136,9 @@ class KeysightController:
         try:
             self.logger.info(f"Setting run repetition to {count} times")
             if count > 1:
-                self.remote_app.SetConfig("RunRepetition", "N Times")
+                self.remote_app.SetConfig("RunRepetition", "'N Times'")
             else:
-                self.remote_app.SetConfig("RunRepetition", "Once")
+                self.remote_app.SetConfig("RunRepetition", "'Once'")
             self.remote_app.SetConfig("NumRuns", str(count))
             return True
         except Exception as e:
