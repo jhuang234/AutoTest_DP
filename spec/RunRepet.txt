@@ -1,0 +1,38 @@
+The repetition mode to use for the next run.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Properties -----
+RunRepetition?
+
+RunRepetition '<mode>'
+
+----- Parameters -----
+<mode> = One of the following:
+    Once
+    N Times
+    Forever
+
+----- Run-time Parameter Discovery -----
+GetAllOptions 'RunRepetitionNames'
+GetCurrentOptions 'RunRepetitionNames'
+
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+
+
+The number of times to run the selected tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Properties -----
+NumRuns?
+
+NumRuns '<Int32>'
+
+----- Parameters -----
+<Int32> = Any integer > 0
+
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
