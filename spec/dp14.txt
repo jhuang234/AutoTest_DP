@@ -1,0 +1,540 @@
+Select the test specification.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'DPCTSVersion'
+
+SetConfig 'DPCTSVersion' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    1.2b
+    1.4a
+    1.4
+    DPoC 1.4a
+    DPoC
+    MyDP 1.0
+    MyDP HBR25
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'DPCTSVersion'
+
+----- Note -----
+Select the test specification.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Select the test selection.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'TestLayer'
+
+SetConfig 'TestLayer' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Physical Layer Tests
+    AUX PHY and Inrush Tests
+    Dual Mode Tests
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'TestLayer'
+
+----- Note -----
+Select the test selection.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select if re-timer is attached.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'IsRetimerAttached'
+
+SetConfig 'IsRetimerAttached' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'IsRetimerAttached'
+
+----- Note -----
+Select if re-timer is attached.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Select the DisplayPort Test Controller (DPTC) used for automation.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'AutomatedType'
+
+SetConfig 'AutomatedType' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    TCPIP
+    Unigraf.UCD323G2
+    UnigrafDPTC
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'AutomatedType'
+
+----- Note -----
+Select the DisplayPort Test Controller (DPTC) used for automation.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Enable or disable DisplayPort Test Controller (DPTC) automation.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'pcbEnableAutomation'
+
+SetConfig 'pcbEnableAutomation' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'pcbEnableAutomation'
+
+----- Note -----
+Enable or disable DisplayPort Test Controller (DPTC) automation.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Device identifier.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'DeviceID'
+
+SetConfig 'DeviceID' '<value>'
+
+----- Parameters -----
+<value> = (Accepts user-defined text)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'DeviceID'
+
+----- Note -----
+Device identifier.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Operator identifier.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'OperatorID'
+
+SetConfig 'OperatorID' '<value>'
+
+----- Parameters -----
+<value> = (Accepts user-defined text)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'OperatorID'
+
+----- Note -----
+Operator identifier.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Project identifier.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'ProjectID'
+
+SetConfig 'ProjectID' '<value>'
+
+----- Parameters -----
+<value> = (Accepts user-defined text)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'ProjectID'
+
+----- Note -----
+Project identifier.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Additional comments.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Comments'
+
+SetConfig 'Comments' '<value>'
+
+----- Parameters -----
+<value> = (Accepts user-defined text)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Comments'
+
+----- Note -----
+Additional comments.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Select the number of lane(s) supported by the DUT.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Lane'
+
+SetConfig 'Lane' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    1 Lane
+    2 Lanes
+    4 Lanes
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Lane'
+
+----- Note -----
+Select the number of lane(s) supported by the DUT.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Bit Rate 1.62 Gbps support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig '1.62 Gbps'
+
+SetConfig '1.62 Gbps' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' '1.62 Gbps'
+
+----- Note -----
+Enable or disable Bit Rate 1.62 Gbps support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Bit Rate 2.7 Gbps support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig '2.7 Gbps'
+
+SetConfig '2.7 Gbps' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' '2.7 Gbps'
+
+----- Note -----
+Enable or disable Bit Rate 2.7 Gbps support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Bit Rate 5.4 Gbps support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig '5.4 Gbps'
+
+SetConfig '5.4 Gbps' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' '5.4 Gbps'
+
+----- Note -----
+Enable or disable Bit Rate 5.4 Gbps support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Bit Rate 8.1 Gbps support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig '8.1 Gbps'
+
+SetConfig '8.1 Gbps' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' '8.1 Gbps'
+
+----- Note -----
+Enable or disable Bit Rate 8.1 Gbps support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Select the SSC capability supported by the DUT.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'SSCOption'
+
+SetConfig 'SSCOption' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Disabled
+    Enabled
+    Both
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'SSCOption'
+
+----- Note -----
+Select the SSC capability supported by the DUT.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Voltage Level Swing 0 support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Swing 0'
+
+SetConfig 'Swing 0' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Swing 0'
+
+----- Note -----
+Enable or disable Voltage Level Swing 0 support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Voltage Level Swing 1 support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Swing 1'
+
+SetConfig 'Swing 1' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Swing 1'
+
+----- Note -----
+Enable or disable Voltage Level Swing 1 support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Voltage Level Swing 2 support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Swing 2'
+
+SetConfig 'Swing 2' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Swing 2'
+
+----- Note -----
+Enable or disable Voltage Level Swing 2 support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Pre-emphasis Level 0 support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Pre-emphasis 0'
+
+SetConfig 'Pre-emphasis 0' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Pre-emphasis 0'
+
+----- Note -----
+Enable or disable Pre-emphasis Level 0 support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Pre-emphasis Level 1 support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Pre-emphasis 1'
+
+SetConfig 'Pre-emphasis 1' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Pre-emphasis 1'
+
+----- Note -----
+Enable or disable Pre-emphasis Level 1 support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable Pre-emphasis Level 2 support.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'Pre-emphasis 2'
+
+SetConfig 'Pre-emphasis 2' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'Pre-emphasis 2'
+
+----- Note -----
+Enable or disable Pre-emphasis Level 2 support.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+Select the fixture type based on the actual fixture used for the test. If the actual fixture used is not listed, please select
+'Other'.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'FixtureType'
+
+SetConfig 'FixtureType' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Wilder Tech DP-TPA-P/ BIT-DP-PTF-0003
+    Wilder Tech mDP-TPA-P/ BIT-mDP-PTF-0001
+    Keysight W2641B
+    Luxshare ICT mDP Plug
+    Other
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'FixtureType'
+
+----- Note -----
+Select the fixture type based on the actual fixture used for the test. If the actual fixture used is not listed, please select
+'Other'.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+Enable or disable fixture de-embedding based on the 'Fixture Type' selected.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'DeEmbedFixture'
+
+SetConfig 'DeEmbedFixture' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    0.0
+    1.0
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'DeEmbedFixture'
+
+----- Note -----
+Enable or disable fixture de-embedding based on the 'Fixture Type' selected.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Select the connection type, either 'Differential Probe' connection or 'Single-Ended (A-B)' connection for Physical Layer
+Tests. If 'Single-Ended Tests' or 'Both' is selected for 'Test Type', only 'Single-Ended (A-B)' connection will be available.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'ConnectionType'
+
+SetConfig 'ConnectionType' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    Differential Probe
+    Single-Ended (A-B)
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'ConnectionType'
+
+----- Note -----
+Select the connection type, either 'Differential Probe' connection or 'Single-Ended (A-B)' connection for Physical Layer
+Tests. If 'Single-Ended Tests' or 'Both' is selected for 'Test Type', only 'Single-Ended (A-B)' connection will be available.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
+
+
+
+Select the number of channel(s) based on the actual number of channel(s) used for Physical Layer Tests.
+
+ARSL CommandLine Utility:  arsl -a <app's ip address> -c "<command>"
+
+----- IRemoteAte Methods -----
+GetConfig 'ConnectionSetting'
+
+SetConfig 'ConnectionSetting' '<value>'
+
+----- Parameters -----
+<value> = One of the following:
+    1 Channel
+    2 Channels
+    4 Channels
+
+----- Run-time Parameter Discovery -----
+GetAllOptionsForMember 'ConfigValues' 'ConnectionSetting'
+
+----- Note -----
+Select the number of channel(s) based on the actual number of channel(s) used for Physical Layer Tests.
+For more information, please see the N5452A Remote Programming Toolkit documentation (www.keysight.com/find/rpi).
